@@ -56,6 +56,7 @@ var Recorder = React.createClass({
   saveTrack: function (e) {
     this.state.track.set('name', prompt("Track Name:"));
     this.state.track.save();
+    this.setState({ recording: false, track: new Track() });
   },
 
   trackSavingElements: function () {
