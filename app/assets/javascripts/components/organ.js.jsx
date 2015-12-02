@@ -2,7 +2,49 @@
 
   root.Organ = React.createClass ({
     getInitialState: function () {
-      return ({ octave: KeyConstants.OCTAVE });
+      return ({ octave: KeyConstants.OCTAVE, caps: false });
+    },
+
+    componentDidMount: function () {
+      $(root.document).on('keydown', this._onKeyDown.bind(this));
+      $(root.document).on('keyup', this._onKeyUp.bind(this));
+    },
+
+    componentWillUnmount: function () {
+      $(root.document).off('keydown', this._onKeyDown.bind(this));
+      $(root.document).off('keyup', this._onKeyUp.bind(this));
+    },
+
+    _onKeyDown: function (e) {
+      if (this.state.caps) {
+        e.preventDefault();
+        var key = KeyConstants.KEY_CODES[e.keyCode];
+        if (key === 'C2') {
+          key = 'C' + (KeyConstants.OCTAVE + 1);
+        } else {
+          key = key + KeyConstants.OCTAVE;
+        }
+        KeyActions.keyPressed(key);
+      } else if (e.keyCode === 20) {
+        this.setState({ caps: true });
+      }
+    },
+
+    _onKeyUp: function (e) {
+      if (this.state.caps) {
+        if (e.keyCode === 20) {
+          this.setState({ caps: false });
+        } else {
+          e.preventDefault();
+          var key = KeyConstants.KEY_CODES[e.keyCode];
+          if (key === 'C2') {
+            key = 'C' + (KeyConstants.OCTAVE + 1);
+          } else {
+            key = key + KeyConstants.OCTAVE;
+          }
+          KeyActions.keyReleased(key);
+        }
+      }
     },
 
     render: function () {
