@@ -15,12 +15,27 @@ ul {
 }
 
 body {
+  background:
+    linear-gradient(
+      to right,
+      rgba(179,220,237,1) 0%,
+      rgba(41,184,229,1) 50%,
+      rgba(188,224,238,1) 100%
+    );
+  font-family: courier;
+  color: green;
 }
 
 .group:after {
   content: '';
   display: block;
   clear: both;
+}
+
+h3 {
+  margin: auto;
+  text-align: center;
+  color: black;
 }
 
 .key {
