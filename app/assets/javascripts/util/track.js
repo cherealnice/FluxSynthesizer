@@ -46,7 +46,7 @@ Track.prototype.parseNotes = function (currentFrame, currentNotes) {
       }
     }
   });
-  
+
   currentNotes.forEach(function (note) {
     for (var i = 0; i < currentFrame.length; i++) {
       var stop = true;
@@ -88,4 +88,8 @@ Track.prototype.play = function () {
   }
   }.bind(this), this.interval);
 
+};
+
+Track.prototype.stopPlay = function () {
+  this.interval = null;
 };

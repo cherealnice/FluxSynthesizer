@@ -22,11 +22,6 @@ body {
   clear: both;
 }
 
-.pressed {
-  // font-weight: bold;
-  opacity: .5;
-}
-
 .key {
   margin-top: 50px;
   float: left;
@@ -35,6 +30,7 @@ body {
   box-sizing: border-box;
   height: 200px;
   background: white;
+  text-align: center;
 }
 
 .black {
@@ -44,13 +40,34 @@ body {
   left: 70px;
   transform: translateX(-50%);
   position: absolute;
+  color: white;
+}
+
+._1 {
+  left: 70px;
+}
+
+._3 {
+  left: 140px;
+}
+
+._6 {
+  left: 280px;
+}
+
+._8 {
+  left: 350px;
+}
+
+._10 {
+  left: 420px;
 }
 
 .organ {
   display: block;
   margin: auto;
   height: 250px;
-  width: 550px;
+  width: 620px;
   background: red;
   border: 2px solid black;
   border-radius: 5px;
@@ -58,6 +75,10 @@ body {
 
 .keys {
   margin: auto;
-  width: 490px;
+  width: 560px;
   position: relative;
+}
+
+.pressed {
+  background: rgb(51, 242, 111);
 }
