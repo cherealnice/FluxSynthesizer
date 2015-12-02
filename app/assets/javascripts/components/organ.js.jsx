@@ -6,13 +6,13 @@
     },
 
     componentDidMount: function () {
-      $(root.document).on('keydown', this._onKeyDown.bind(this));
-      $(root.document).on('keyup', this._onKeyUp.bind(this));
+      $(root.document).on('keydown', this._onKeyDown);
+      $(root.document).on('keyup', this._onKeyUp);
     },
 
     componentWillUnmount: function () {
-      $(root.document).off('keydown', this._onKeyDown.bind(this));
-      $(root.document).off('keyup', this._onKeyUp.bind(this));
+      $(root.document).off('keydown', this._onKeyDown);
+      $(root.document).off('keyup', this._onKeyUp);
     },
 
     _onKeyDown: function (e) {
@@ -55,13 +55,14 @@
           <ul className='keys group'>
             {
               notes.map(function (noteName, i) {
-                return (<Key index={i} noteName={noteName + octave} />);
+                return (<Key key={i} index={i} noteName={noteName + octave} />);
               })
             }
             <Key index={12} noteName={"C" + (octave + 1)} />
           </ul>
 
           <Recorder />
+          <JukeBox />
         </div>
       );
     }
