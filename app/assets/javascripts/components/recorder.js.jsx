@@ -54,7 +54,7 @@ var Recorder = React.createClass({
   },
 
   saveTrack: function (e) {
-    this.state.track.set('name', prompt("please enter name"));
+    this.state.track.set('name', prompt("Track Name:"));
     this.state.track.save();
   },
 
