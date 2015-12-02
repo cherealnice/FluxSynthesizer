@@ -12,7 +12,7 @@
 
     render: function () {
       return (
-        <div className="jukebox">
+        <div className="digital jukebox">
           <h3>JUKEBOX</h3>
           {
             this.state.tracks.map(function (track) {

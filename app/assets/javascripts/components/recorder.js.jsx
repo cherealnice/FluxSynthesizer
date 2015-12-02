@@ -53,23 +53,6 @@ var Recorder = React.createClass({
     }
   },
 
-  render: function () {
-    var hasTrack = this.isTrackNew();
-
-    return (
-      <div className="controls">
-        <h3>Recorder</h3>
-        <button onClick={this.recordClick} className="record-button">
-          { this.recordingMessage() }
-        </button>
-        { this.trackSavingElements() }
-        <button onClick={this.playClick} className={this.playClass()}>
-          Play
-        </button>
-      </div>
-    );
-  },
-
   saveTrack: function (e) {
     this.state.track.set('name', prompt("please enter name"));
     this.state.track.save();
@@ -89,5 +72,24 @@ var Recorder = React.createClass({
     if (this.state.recording){
       this.state.track.addNotes(KeyStore.all());
     }
+  },
+
+  render: function () {
+    var hasTrack = this.isTrackNew();
+
+    return (
+      <div className="controls digital group">
+        <h3>RECORDER</h3>
+        <div className='buttons group'>
+          <button onClick={this.recordClick} className="record-button">
+            { this.recordingMessage() }
+          </button>
+          { this.trackSavingElements() }
+          <button onClick={this.playClick} className={this.playClass()}>
+            Play
+          </button>
+        </div>
+      </div>
+    );
   }
 });

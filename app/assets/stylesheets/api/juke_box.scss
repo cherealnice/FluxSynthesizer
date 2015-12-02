@@ -1,0 +1,54 @@
+.digital {
+  margin-top: 20px;
+  width: 624px;
+  height: 100px;
+  float: left;
+  text-align: center;
+  background: black;
+  border-radius: 6px;
+  overflow: scroll;
+  font-family: digital;
+  color: green;
+  font-family: courier;
+  border: 2px solid grey;
+  box-sizing: border-box;
+}
+
+.digital h3 {
+  margin: 10px;
+  font-size: 20px;
+}
+
+.track {
+  width: 100%;
+  border: 1px solid lightbrown;
+  margin: 10px auto;
+  padding: 5px;
+  box-sizing: border-box;
+  width: 300px;
+  background: lightgreen;
+  border-radius: 6px;
+  font-size: 18px;
+  border: 2px solid grey;
+}
+
+.track-name {
+  display: inline;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.digital button {
+  background: black;
+  padding: 5px;
+  cursor: pointer;
+  border: 1px solid grey;
+  float: right;
+  display: block;
+}
+
+button:focus {
+  outline: 0;
+}
