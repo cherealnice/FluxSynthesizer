@@ -1,0 +1,63 @@
+html, body, ul, li, div, p, h1, h3 {
+  font-style: inherit;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  box-sizing: inherit;
+  font: inherit;
+  background: transparent;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+body {
+}
+
+.group:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.pressed {
+  // font-weight: bold;
+  opacity: .5;
+}
+
+.key {
+  margin-top: 50px;
+  float: left;
+  width: 70px;
+  border: 1px solid black;
+  box-sizing: border-box;
+  height: 200px;
+  background: white;
+}
+
+.black {
+  height: 150px;
+  background: black;
+  width: 50px;
+  left: 70px;
+  transform: translateX(-50%);
+  position: absolute;
+}
+
+.organ {
+  display: block;
+  margin: auto;
+  height: 250px;
+  width: 550px;
+  background: red;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.keys {
+  margin: auto;
+  width: 490px;
+  position: relative;
+}
