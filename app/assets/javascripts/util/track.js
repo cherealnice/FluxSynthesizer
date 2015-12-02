@@ -1,95 +1,78 @@
-var Track = window.Track = function (attributes) {
-  this.name = attributes.name;
-  this.roll = attributes.roll || [];
-};
+function Track(attrs) {
+  var defaults = {
+    name: "",
+    roll: []
+  };
 
-Track.prototype.startRecording = function () {
-  this.roll = [];
-  this.startTime = new Date();
-};
+  this.attributes = $.extend(defaults, attrs || {});
+}
 
-Track.prototype.stopRecording = function () {
-  var timeslice = new Date() - this.startTime;
-  this.addNotes([]);
-};
-
-Track.prototype.addNotes = function (notes) {
-    var timeslice = new Date() - this.startTime;
-    this.roll.push({ timeslice: timeslice, notes: notes });
-};
-
-
-Track.prototype.parseNotes = function (currentFrame, currentNotes) {
-
-    if (currentNotes.length === 0) {
-      currentFrame.forEach(function (note) {
-        KeyActions.keyPressed(note);
-      });
+Track.prototype = {
+  addNotes: function (notes) {
+    var timeSlice = { time: this._timeDelta() };
+    if (notes.length > 0) {
+      timeSlice.notes = notes;
     }
+    this.attributes.roll.push(timeSlice);
+  },
 
-    if (currentFrame.length === 0) {
-      currentNotes.forEach(function (note) {
-        KeyActions.keyReleased(note);
-      });
-    }
+  completeRecording: function () {
+    this.addNotes([]);
+  },
 
-  currentFrame.forEach(function (note) {
+  get: function (attr) {
+    return this.attributes[attr];
+  },
 
-    for (var i = 0; i < currentNotes.length; i++) {
-      var play = true;
-      if (currentNotes[i] === note) {
-        play = false;
+  isBlank: function () {
+    return this.attributes.roll.length === 0;
+  },
+
+  play: function () {
+    if (this.interval) { return; }
+
+    var currentNote = 0,
+        playBackStartTime = Date.now(),
+        roll = this.attributes.roll,
+        delta;
+
+    this.interval = setInterval(function () {
+
+      if (currentNote < roll.length) {
+        delta = Date.now() - playBackStartTime;
+
+        if (delta >= roll[currentNote].time) {
+          var notes = roll[currentNote].notes || [];
+          KeyActions.groupUpdate(notes);
+          currentNote++;
+        }
+      } else {
+        clearInterval(this.interval);
+        delete this.interval;
       }
+    }.bind(this), 20);
+  },
 
-      if (play) {
-        KeyActions.keyPressed(note);
-      }
-    }
-  });
+  set: function (attr, val) {
+    this.attributes[attr] = val;
+  },
 
-  currentNotes.forEach(function (note) {
-    for (var i = 0; i < currentFrame.length; i++) {
-      var stop = true;
-      if (currentFrame[i] === note) {
-        stop = false;
-      }
-
-      if(stop) {
-        KeyActions.keyReleased(note);
-      }
-    }
-  });
-};
-
-Track.prototype.play = function () {
-  if (this.interval) {
-    return;
-  }
-
-  var playbackStartTime = Date.now();
-  var currentFrameIndex = 0;
-  var currentNotes = [];
-  var currentFrame = [];
-
-  var intervalId = setInterval(function() {
-    if (currentFrameIndex === this.roll.length) {
-      this.interval = 0;
-      clearInterval(intervalId);
+  save: function () {
+    if (this.isBlank()) {
+      throw "track can't be blank!";
+    } else if (this.attributes.name === "") {
+      throw "name can't be blank!";
     } else {
-
-    this.interval = 10;
-    if (this.roll[currentFrameIndex].timeslice < Date.now() - playbackStartTime ) {
-      currentFrame = this.roll[currentFrameIndex].notes;
-      currentNotes = KeyStore.all();
-      currentFrameIndex++;
-    } else {
-      this.parseNotes(currentFrame, currentNotes);
+      TrackActions.createTrack(this.attributes);
     }
+  },
+
+  startRecording: function () {
+    this.attributes.roll = [];
+    this.start = Date.now();
+  },
+
+  _timeDelta: function () {
+    return Date.now() - this.start;
   }
-  }.bind(this), this.interval);
-
-};
-
-Track.prototype.stopPlay = function () {
-  this.interval = null;
 };

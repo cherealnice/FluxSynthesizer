@@ -12,5 +12,12 @@ window.KeyActions = {
       eventType: KeyConstants.KEY_RELEASED,
       note: note
     });
+  },
+
+  groupUpdate: function (notes) {
+    AppDispatcher.dispatch({
+      actionType: OrganConstants.GROUP_UPDATE,
+      notes: notes
+    });
   }
 };
