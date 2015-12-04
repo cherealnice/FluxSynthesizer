@@ -2,7 +2,12 @@
 
   root.Organ = React.createClass ({
     getInitialState: function () {
-      return ({ wave: 'sine', octave: KeyConstants.OCTAVE, caps: false });
+      return ({
+        chorus: false,
+        wave: 'sine',
+        octave: KeyConstants.OCTAVE,
+        caps: false
+      });
     },
 
     componentDidMount: function () {
@@ -37,6 +42,10 @@
       this.setState({ wave: waves[newIdx] });
     },
 
+    _handleChorusChange: function () {
+      this.setState({ chorus: !this.state.chorus });
+    },
+
     _onKeyUp: function (e) {
       if (this.state.caps) {
         if (e.keyCode === 20) {
@@ -56,14 +65,20 @@
 
     render: function () {
       var options = {
-        wave: this.state.wave
+        wave: this.state.wave,
+        chorus: this.state.chorus
       };
+      var chorusText = this.state.chorus ? ' on' : ' off';
       var capsOpacity = this.state.caps ? {opacity: 1} : {opacity: 0.4};
       var octave = this.state.octave;
       var notes = ["C", "C#", "D", "D#","E", "F", "F#", "G", "G#", "A", "A#", "B"];
       return (
         <div className='organ group'>
           <button onClick={this._handleWaveChange}>{this.state.wave}</button>
+          <button
+            onClick={this._handleChorusChange}>
+              {"Chorus:" + chorusText}
+          </button>
           <ul style={capsOpacity} className='keys group'>
             {
               notes.map(function (noteName, i) {

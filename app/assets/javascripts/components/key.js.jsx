@@ -6,15 +6,27 @@
     },
 
     componentDidMount: function () {
-      var noteName = this.props.noteName;
-      var wave = this.props.options.wave;
-      var freq = TONES[noteName];
-      this.noteInstance = new Note(freq, wave);
+      this.noteInstances = this.createNotes();
       KeyStore.addChangeHandler(this.changeHandler);
     },
 
+    createNotes: function () {
+      var noteName = this.props.noteName;
+      var wave = this.props.options.wave;
+      var freq = TONES[noteName];
+      var notes = [];
+      for (var i = 0; i < 4; i++) {
+        var note = new Note(freq, wave);
+        notes.push(note);
+      }
+
+      return notes;
+    },
+
     componentWillReceiveProps: function (newProps) {
-      this.noteInstance.updateOptions(newProps.options);
+      this.noteInstances.forEach(function (note) {
+        note.updateOptions(newProps.options);
+      });
     },
 
     changeHandler: function () {
@@ -24,10 +36,14 @@
       }.bind(this));
 
       if (inKeys) {
-        this.noteInstance.start();
+        this.noteInstances.forEach(function (note) {
+          note.start();
+        });
         this.setState({pressed: true});
       } else {
-        this.noteInstance.stop();
+        this.noteInstances.forEach(function (note) {
+          note.stop();
+        });
         this.setState({pressed: false});
       }
     },
