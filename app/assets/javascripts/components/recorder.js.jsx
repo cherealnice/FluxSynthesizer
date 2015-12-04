@@ -85,10 +85,10 @@ var Recorder = React.createClass({
           <button onClick={this.recordClick} className="record-button">
             { this.recordingMessage() }
           </button>
-          { this.trackSavingElements() }
           <button onClick={this.playClick} className={this.playClass()}>
             Play
           </button>
+          { this.trackSavingElements() }
         </div>
       </div>
     );
