@@ -74,8 +74,11 @@
       var notes = ["C", "C#", "D", "D#","E", "F", "F#", "G", "G#", "A", "A#", "B"];
       return (
         <div className='organ group'>
-          <button onClick={this._handleWaveChange}>{this.state.wave}</button>
-          <button
+          <button className='wave-button organ-options-button'
+            onClick={this._handleWaveChange}>
+              {this.state.wave}
+          </button>
+          <button className='chorus-button organ-options-button'
             onClick={this._handleChorusChange}>
               {"Chorus:" + chorusText}
           </button>
