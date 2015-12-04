@@ -6,7 +6,6 @@
   text-align: center;
   background: black;
   border-radius: 6px;
-  overflow: scroll;
   color: green;
   border: 2px solid grey;
   box-sizing: border-box;
@@ -34,10 +33,6 @@
   display: inline;
 }
 
-::-webkit-scrollbar {
-    display: none;
-}
-
 .digital button {
   background: black;
   padding: 5px;
@@ -49,4 +44,9 @@
 
 button:focus {
   outline: 0;
+}
+
+.jukebox {
+  overflow: scroll;
+  overflow-x:hidden;
 }

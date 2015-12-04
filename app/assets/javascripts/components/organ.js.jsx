@@ -48,11 +48,12 @@
     },
 
     render: function () {
+      var capsOpacity = this.state.caps ? {opacity: 1} : {opacity: 0.4};
       var octave = this.state.octave;
       var notes = ["C", "C#", "D", "D#","E", "F", "F#", "G", "G#", "A", "A#", "B"];
       return (
         <div className='organ group'>
-          <ul className='keys group'>
+          <ul style={capsOpacity} className='keys group'>
             {
               notes.map(function (noteName, i) {
                 return (<Key key={i} index={i} noteName={noteName + octave} />);
