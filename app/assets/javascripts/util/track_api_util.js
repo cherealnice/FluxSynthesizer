@@ -4,7 +4,7 @@
       $.ajax({
         url: '/api/tracks',
         method: 'POST',
-        data: JSON.stringify({ track: track }),
+        data: JSON.stringify({ track: track,}),
         dataType: 'json',
         contentType: "application/json",
         success: function (track) {

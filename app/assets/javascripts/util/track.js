@@ -57,7 +57,8 @@ Track.prototype = {
     this.attributes[attr] = val;
   },
 
-  save: function () {
+  save: function (options) {
+    this.attributes.options = options;
     if (this.isBlank()) {
       throw "track can't be blank!";
     } else if (this.attributes.name === "") {

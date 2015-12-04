@@ -1,6 +1,7 @@
 (function (root) {
   root.TrackPlayer = React.createClass({
     playClick: function () {
+      root.TrackActions.resetOptions(this.props.track);
       this.props.track.play();
     },
 

@@ -13,11 +13,23 @@
     componentDidMount: function () {
       $(root.document).on('keydown', this._onKeyDown);
       $(root.document).on('keyup', this._onKeyUp);
+      root.OptionsStore.addChangeHandler(this._resetOptions);
     },
 
     componentWillUnmount: function () {
       $(root.document).off('keydown', this._onKeyDown);
       $(root.document).off('keyup', this._onKeyUp);
+      root.OptionsStore.removeChangeHandler(this._resetOptions);
+    },
+
+    _resetOptions: function () {
+      var newOptions = root.OptionsStore.all();
+      var wave = newOptions.wave;
+      var chorus = newOptions.chorus;
+      this.setState({
+        wave: wave,
+        chorus: chorus
+      });
     },
 
     _onKeyDown: function (e) {
@@ -98,7 +110,7 @@
             <Key options={options} index={12} noteName={"C" + (octave + 1)} />
           </ul>
 
-          <Recorder />
+          <Recorder options={options} />
           <JukeBox />
         </div>
       );
