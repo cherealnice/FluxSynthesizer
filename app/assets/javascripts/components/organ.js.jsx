@@ -2,7 +2,7 @@
 
   root.Organ = React.createClass ({
     getInitialState: function () {
-      return ({ octave: KeyConstants.OCTAVE, caps: false });
+      return ({ wave: 'sine', octave: KeyConstants.OCTAVE, caps: false });
     },
 
     componentDidMount: function () {
@@ -30,6 +30,13 @@
       }
     },
 
+    _handleWaveChange: function () {
+      var waves = [ 'sine', 'square', 'triangle', 'sawtooth' ];
+      var idx = waves.indexOf(this.state.wave);
+      var newIdx = (idx + 1) % 4;
+      this.setState({ wave: waves[newIdx] });
+    },
+
     _onKeyUp: function (e) {
       if (this.state.caps) {
         if (e.keyCode === 20) {
@@ -48,18 +55,29 @@
     },
 
     render: function () {
+      var options = {
+        wave: this.state.wave
+      };
       var capsOpacity = this.state.caps ? {opacity: 1} : {opacity: 0.4};
       var octave = this.state.octave;
       var notes = ["C", "C#", "D", "D#","E", "F", "F#", "G", "G#", "A", "A#", "B"];
       return (
         <div className='organ group'>
+          <button onClick={this._handleWaveChange}>{this.state.wave}</button>
           <ul style={capsOpacity} className='keys group'>
             {
               notes.map(function (noteName, i) {
-                return (<Key key={i} index={i} noteName={noteName + octave} />);
+                return (
+                  <Key
+                    options={options}
+                    key={i}
+                    index={i}
+                    noteName={noteName + octave}
+                  />
+                );
               })
             }
-            <Key index={12} noteName={"C" + (octave + 1)} />
+            <Key options={options} index={12} noteName={"C" + (octave + 1)} />
           </ul>
 
           <Recorder />

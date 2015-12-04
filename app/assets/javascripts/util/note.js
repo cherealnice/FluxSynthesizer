@@ -2,9 +2,9 @@
   var AudioContext = window.AudioContext || window.webkitAudioContext;
   var ctx = new AudioContext();
 
-  var createOscillator = function (freq) {
+  var createOscillator = function (freq, wave) {
   var osc = ctx.createOscillator();
-  osc.type = "sawtooth";
+  osc.type = wave;
   osc.frequency.value = freq;
   osc.detune.value = 0;
   osc.start(ctx.currentTime);
@@ -18,10 +18,9 @@
     return gainNode;
   };
 
-  var Note = window.Note = function (freq) {
-    this.oscillatorNode = createOscillator(freq);
+  var Note = window.Note = function (freq, wave) {
+    this.oscillatorNode = createOscillator(freq, wave);
     this.gainNode = createGainNode();
-    // this.note = TONES[this.freq];
     this.oscillatorNode.connect(this.gainNode);
   };
 
@@ -31,6 +30,10 @@
 
   Note.prototype.stop = function () {
     this.gainNode.gain.value = 0;
+  };
+
+  Note.prototype.updateOptions = function (options) {
+    this.oscillatorNode.type = options.wave;
   };
 
 })();

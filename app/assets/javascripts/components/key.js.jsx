@@ -7,9 +7,14 @@
 
     componentDidMount: function () {
       var noteName = this.props.noteName;
+      var wave = this.props.options.wave;
       var freq = TONES[noteName];
-      this.noteInstance = new Note(freq);
+      this.noteInstance = new Note(freq, wave);
       KeyStore.addChangeHandler(this.changeHandler);
+    },
+
+    componentWillReceiveProps: function (newProps) {
+      this.noteInstance.updateOptions(newProps.options);
     },
 
     changeHandler: function () {
