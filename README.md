@@ -1,5 +1,5 @@
 # Flux Synthesizer
-[Live Demo](www.test.com)
+[Live Demo](http://cherealnice.github.io/JungleSnakes/)
 
 A web-based keyboard implementing ReactJS which allows creating and loading tracks from a database and real-time computer-keyboard playing.
 
