@@ -15,6 +15,7 @@ class Api::TracksController < ApplicationController
 
   private
 
+
   ROLL_FILTER = {:roll => [:time, :notes => []]}
   OPTIONS_FILTER = {:options => [:wave, :chorus]}
 
