@@ -59,6 +59,7 @@ var Recorder = React.createClass({
   saveTrack: function (e) {
     this.state.track.set('name', prompt("Track Name:"));
     this.state.track.set('options', this.props.options);
+    this.state.track.set('octave', this.props.octave);
     this.state.track.save();
     this.setState({
       recording: false,

@@ -32,10 +32,12 @@
     this.gainNode.gain.value = 0;
   };
 
-  Note.prototype.updateOptions = function (options) {
+  Note.prototype.updateOptions = function (options, noteName) {
     this.oscillatorNode.type = options.wave;
     this.oscillatorNode.detune.value =
       options.chorus ? Math.floor( 30 * Math.random() ) - 15 : 0;
+    this.oscillatorNode.frequency.value = TONES[noteName];
+
   };
 
 })();

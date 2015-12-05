@@ -25,7 +25,7 @@
 
     componentWillReceiveProps: function (newProps) {
       this.noteInstances.forEach(function (note) {
-        note.updateOptions(newProps.options);
+        note.updateOptions(newProps.options, newProps.noteName);
       });
     },
 

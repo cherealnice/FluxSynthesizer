@@ -6,7 +6,7 @@
       return ({
         chorus: opts.chorus,
         wave: opts.wave,
-        octave: KeyConstants.OCTAVE,
+        octave: 5,
         caps: false
       });
     },
@@ -38,9 +38,9 @@
         e.preventDefault();
         var key = KeyConstants.KEY_CODES[e.keyCode];
         if (key === 'C2') {
-          key = 'C' + (KeyConstants.OCTAVE + 1);
+          key = 'C' + (this.state.octave + 1);
         } else {
-          key = key + KeyConstants.OCTAVE;
+          key = key + this.state.octave;
         }
         KeyActions.keyPressed(key);
       } else if (e.keyCode === 20) {
@@ -59,6 +59,18 @@
       this.setState({ chorus: !this.state.chorus });
     },
 
+    _handleOctaveUp: function () {
+      if (this.state.octave <= 6) {
+        this.setState({ octave: (this.state.octave + 1) });
+      }
+    },
+
+    _handleOctaveDown: function () {
+      if (this.state.octave >= 3) {
+        this.setState({ octave: (this.state.octave - 1) });
+      }
+    },
+
     _onKeyUp: function (e) {
       if (this.state.caps) {
         if (e.keyCode === 20) {
@@ -67,9 +79,9 @@
           e.preventDefault();
           var key = KeyConstants.KEY_CODES[e.keyCode];
           if (key === 'C2') {
-            key = 'C' + (KeyConstants.OCTAVE + 1);
+            key = 'C' + (this.state.octave + 1);
           } else {
-            key = key + KeyConstants.OCTAVE;
+            key = key + this.state.octave;
           }
           KeyActions.keyReleased(key);
         }
@@ -79,7 +91,7 @@
     render: function () {
       var options = {
         wave: this.state.wave,
-        chorus: this.state.chorus
+        chorus: this.state.chorus,
       };
       var chorusText = this.state.chorus ? ' on' : ' off';
       var capsOpacity = this.state.caps ? {opacity: 1} : {opacity: 0.4};
@@ -94,6 +106,15 @@
           <button className='chorus-button organ-options-button'
             onClick={this._handleChorusChange}>
               {"Chorus:" + chorusText}
+          </button>
+          <button className='octave-button octave-down organ-options-button'
+            onClick={this._handleOctaveDown}>
+              -
+          </button>
+          <p className="octave">{'OCTAVE: ' + (octave - 5)}</p>
+          <button className='octave-button octave-up organ-options-button'
+            onClick={this._handleOctaveUp}>
+              +
           </button>
           <ul style={capsOpacity} className='keys group'>
             {
@@ -111,7 +132,7 @@
             <Key options={options} index={12} noteName={"C" + (octave + 1)} />
           </ul>
 
-          <Recorder options={options} />
+          <Recorder options={options} octave={octave} />
           <JukeBox />
         </div>
       );

@@ -19,6 +19,6 @@ class Api::TracksController < ApplicationController
   OPTIONS_FILTER = {:options => [:wave, :chorus]}
 
   def track_params
-    params.require(:track).permit(:name, ROLL_FILTER, OPTIONS_FILTER)
+    params.require(:track).permit(:name, ROLL_FILTER, OPTIONS_FILTER, :octave)
   end
 end
