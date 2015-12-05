@@ -6,7 +6,7 @@
       return ({
         chorus: opts.chorus,
         wave: opts.wave,
-        octave: 5,
+        octave: opts.octave,
         caps: false
       });
     },
@@ -27,9 +27,11 @@
       var newOptions = root.OptionsStore.all();
       var wave = newOptions.wave;
       var chorus = newOptions.chorus;
+      var octave = newOptions.octave;
       this.setState({
         wave: wave,
-        chorus: chorus
+        chorus: chorus,
+        octave: (octave)
       });
     },
 
