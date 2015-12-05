@@ -35,7 +35,7 @@
   Note.prototype.updateOptions = function (options) {
     this.oscillatorNode.type = options.wave;
     this.oscillatorNode.detune.value =
-      options.chorus ? Math.floor( 30 * Math.random() ) : 0;
+      options.chorus ? Math.floor( 30 * Math.random() ) - 15 : 0;
   };
 
 })();
