@@ -17,3 +17,17 @@
 .chorus-button {
   width: 116px;
 }
+
+.octave-button {
+  padding: 0 3px;
+}
+
+.octave {
+  display: inline-block;
+  background: lightgreen;
+  border: 1px solid black;
+  border-radius: 6px;
+  padding: 0 5px;
+  width: 105px;
+  text-align: center;
+}
