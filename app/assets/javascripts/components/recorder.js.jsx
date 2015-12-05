@@ -8,7 +8,10 @@ var Recorder = React.createClass({
   },
 
   getInitialState: function () {
-    return { recording: false, track: new Track() };
+    return {
+      recording: false,
+      track: new Track()
+    };
   },
 
   isDoneRecording: function () {
@@ -55,8 +58,12 @@ var Recorder = React.createClass({
 
   saveTrack: function (e) {
     this.state.track.set('name', prompt("Track Name:"));
+    this.state.track.set('options', this.props.options);
     this.state.track.save();
-    this.setState({ recording: false, track: new Track() });
+    this.setState({
+      recording: false,
+      track: new Track()
+    });
   },
 
   trackSavingElements: function () {

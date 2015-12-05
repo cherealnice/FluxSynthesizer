@@ -20,6 +20,13 @@
         actionType: OrganConstants.RESET_TRACKS,
         tracks: tracks
       });
+    },
+
+    resetOptions: function (track) {
+      AppDispatcher.dispatch({
+        actionType: OrganConstants.RESET_OPTIONS,
+        track: track
+      });
     }
   };
 })(this);
