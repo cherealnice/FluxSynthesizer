@@ -1,3 +1,3 @@
 class Track < ActiveRecord::Base
-  validates :name, :roll, presence: true
+  validates :name, :roll, :options, presence: true
 end

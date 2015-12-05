@@ -9,7 +9,7 @@
     all: function () {
       return _options;
     },
-    
+
     addChangeHandler: function (callback) {
       this.on(CHANGE_EVENT, callback);
     },
