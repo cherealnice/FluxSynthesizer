@@ -2,9 +2,10 @@
 
   root.Organ = React.createClass ({
     getInitialState: function () {
+      var opts = root.OptionsStore.all();
       return ({
-        chorus: false,
-        wave: 'sine',
+        chorus: opts.chorus,
+        wave: opts.wave,
         octave: KeyConstants.OCTAVE,
         caps: false
       });

@@ -18,15 +18,14 @@
       this.removeListener(CHANGE_EVENT, callback);
     },
 
-    _resetOptions: function (track) {
-      var options = track.options;
+    _resetOptions: function (options) {
       _options = options;
     },
 
     dispatcherId: AppDispatcher.register(function (payload) {
       switch (payload.actionType) {
         case OrganConstants.RESET_OPTIONS:
-          root.OptionsStore._resetOptions(payload.track.options);
+          root.OptionsStore._resetOptions(payload.track.attributes.options);
           root.OptionsStore.emit(CHANGE_EVENT);
         break;
       }
