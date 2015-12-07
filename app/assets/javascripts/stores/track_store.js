@@ -8,7 +8,7 @@
     },
 
     all: function () {
-      return _tracks.slice(0);
+      return _tracks.slice(0).reverse();
     },
 
     dispatcherID: AppDispatcher.register(function (payload) {

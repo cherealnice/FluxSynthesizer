@@ -1,6 +1,6 @@
 class Api::TracksController < ApplicationController
   def index
-    @tracks = Track.all.reverse
+    @tracks = Track.all
     render json: @tracks
   end
 
