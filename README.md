@@ -1,4 +1,5 @@
 # Flux Synthesizer
+
 [Live Demo](http://flux-synth.herokuapp.com/)
 
 A web-based keyboard implementing ReactJS which allows creating and loading tracks from a database and real-time computer-keyboard playing.
@@ -19,12 +20,25 @@ These components follow Flux Application Architecture to render in real-time, an
 
 ### Saveable Components
 
-* Note Roll
-* Type of wave selected (sine, square, triangle, or sawtooth)
-* Chorus (on or off)
-* Octave
+##### Note Roll
 
-### How to Run
+* Keeps track of every instance of a note being played vs time
+* Upon playback, snapshots are taken over a 20ms interval of which notes were held down
+
+##### Type of wave selected (sine, square, triangle, or sawtooth)
+
+* Toggles AudioContext Oscillator #type
+
+##### Chorus (on or off)
+
+* Uses AudioContext Oscillator #detune to apply slight variations of tuning over 4 Oscillators
+
+##### Octave
+
+* Effects AudioContext Osillator #frequency, referencing a global object which maps frequencies to note values
+
+
+### How to Run This Code
 
 * Download this repository
 * Install Rails and/or PostgreSQL (if necessary)
