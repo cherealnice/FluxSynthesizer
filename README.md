@@ -1,4 +1,4 @@
-# Flux Synthesizer
+# React Synthesizer
 
 [Live Demo](http://flux-synth.herokuapp.com/)
 
