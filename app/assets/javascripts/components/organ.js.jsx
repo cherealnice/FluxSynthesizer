@@ -7,7 +7,7 @@
         chorus: opts.chorus,
         wave: opts.wave,
         octave: opts.octave,
-        tab: false
+        shift: false
       });
     },
 
@@ -36,9 +36,9 @@
     },
 
     _onKeyDown: function (e) {
-      if (this.state.tab) {
-        if (e.keyCode === 9) {
-          this.setState({ tab: false });
+      if (this.state.shift) {
+        if (e.keyCode === 16) {
+          this.setState({ shift: false });
         } else {
           e.preventDefault();
           var key = KeyConstants.KEY_CODES[e.keyCode];
@@ -49,8 +49,8 @@
           }
           KeyActions.keyPressed(key);
         }
-      } else if (e.keyCode === 9) {
-        this.setState({ tab: true });
+      } else if (e.keyCode === 16) {
+        this.setState({ shift: true });
       }
     },
 
@@ -94,7 +94,7 @@
         chorus: this.state.chorus,
       };
       var chorusText = this.state.chorus ? ' on' : ' off';
-      var tabOpacity = this.state.tab ? {opacity: 1} : {opacity: 0.4};
+      var shiftOpacity = this.state.shift ? {opacity: 1} : {opacity: 0.4};
       var octave = this.state.octave;
       var notes = ["C", "C#", "D", "D#","E", "F", "F#", "G", "G#", "A", "A#", "B"];
       return (
@@ -116,7 +116,7 @@
             onClick={this._handleOctaveUp}>
               +
           </button>
-          <ul style={tabOpacity} className='keys group'>
+          <ul style={shiftOpacity} className='keys group'>
             {
               notes.map(function (noteName, i) {
                 return (
