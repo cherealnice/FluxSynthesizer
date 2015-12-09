@@ -7,7 +7,7 @@
         chorus: opts.chorus,
         wave: opts.wave,
         octave: opts.octave,
-        caps: false
+        tab: false
       });
     },
 
@@ -36,17 +36,21 @@
     },
 
     _onKeyDown: function (e) {
-      if (this.state.caps) {
-        e.preventDefault();
-        var key = KeyConstants.KEY_CODES[e.keyCode];
-        if (key === 'C2') {
-          key = 'C' + (this.state.octave + 1);
+      if (this.state.tab) {
+        if (e.keyCode === 9) {
+          this.setState({ tab: false });
         } else {
-          key = key + this.state.octave;
+          e.preventDefault();
+          var key = KeyConstants.KEY_CODES[e.keyCode];
+          if (key === 'C2') {
+            key = 'C' + (this.state.octave + 1);
+          } else {
+            key = key + this.state.octave;
+          }
+          KeyActions.keyPressed(key);
         }
-        KeyActions.keyPressed(key);
-      } else if (e.keyCode === 20) {
-        this.setState({ caps: true });
+      } else if (e.keyCode === 9) {
+        this.setState({ tab: true });
       }
     },
 
@@ -74,20 +78,14 @@
     },
 
     _onKeyUp: function (e) {
-      if (this.state.caps) {
-        if (e.keyCode === 20) {
-          this.setState({ caps: false });
-        } else {
-          e.preventDefault();
-          var key = KeyConstants.KEY_CODES[e.keyCode];
-          if (key === 'C2') {
-            key = 'C' + (this.state.octave + 1);
-          } else {
-            key = key + this.state.octave;
-          }
-          KeyActions.keyReleased(key);
-        }
+      e.preventDefault();
+      var key = KeyConstants.KEY_CODES[e.keyCode];
+      if (key === 'C2') {
+        key = 'C' + (this.state.octave + 1);
+      } else {
+        key = key + this.state.octave;
       }
+      KeyActions.keyReleased(key);
     },
 
     render: function () {
@@ -96,7 +94,7 @@
         chorus: this.state.chorus,
       };
       var chorusText = this.state.chorus ? ' on' : ' off';
-      var capsOpacity = this.state.caps ? {opacity: 1} : {opacity: 0.4};
+      var tabOpacity = this.state.tab ? {opacity: 1} : {opacity: 0.4};
       var octave = this.state.octave;
       var notes = ["C", "C#", "D", "D#","E", "F", "F#", "G", "G#", "A", "A#", "B"];
       return (
@@ -118,7 +116,7 @@
             onClick={this._handleOctaveUp}>
               +
           </button>
-          <ul style={capsOpacity} className='keys group'>
+          <ul style={tabOpacity} className='keys group'>
             {
               notes.map(function (noteName, i) {
                 return (
